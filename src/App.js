@@ -1,13 +1,15 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import firebase from 'firebase';
+import { View } from 'react-native';
 import { Header } from './components/common';
+import LoginForm from './components/LoginForm';
 
 class App extends React.Component {
   render(){
     return (
       <View>
         <Header title='Authentication' />
-        <Text> my app! </Text>
+        <LoginForm />
       </View>
     )
   }
