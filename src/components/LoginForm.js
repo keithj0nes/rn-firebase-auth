@@ -18,14 +18,20 @@ class LoginForm extends React.Component {
 
 
     if(email && password){
-      firebase.auth().signInWithEmailAndPassword(email, password).then(()=>{
-        this.setState({loading: false})
+      //log in with email and password
+      firebase.auth().signInWithEmailAndPassword(email, password)
+      .then(()=>{
+        this.setState({loading: false, email: '', password: ''})
       })
       .catch(() => {
+        //if login fails, create a user with credentials supplied
           firebase.auth().createUserWithEmailAndPassword(email, password)
+          .then(()=>{
+            this.setState({loading: false, email: '', password: ''})
+          })
           .catch(() => {
-            console.log('login failed');
-            this.setState({loginErr: 'Authentication Failed'})
+            //if creating a user fails, show loging error
+            this.setState({loginErr: 'Authentication Failed', loading: false})
           })
       })
     } else {
